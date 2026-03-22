@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fishborne Microfinance Bank</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green:   #0D6B3E;
+      --green-light: #14915A;
+      --gold:    #C89B3C;
+      --gold-light: #E8B84B;
+      --cream:   #F9F5EE;
+      --dark:    #0E1A14;
+      --mid:     #2A3D32;
+      --text:    #1C2B22;
+      --muted:   #6B8070;
+      --white:   #FFFFFF;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.2rem 5%;
+      background: rgba(13,27,20,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(200,155,60,0.2);
+    }
+
+    .nav-logo {
+      display: flex; align-items: center; gap: .75rem;
+      text-decoration: none;
+    }
+
+    .nav-logo-icon {
+      width: 40px; height: 40px;
+      background: var(--gold);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+    }
+
+    .nav-logo-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem; font-weight: 700;
+      color: var(--white);
+      letter-spacing: .03em;
+    }
+
+    .nav-logo-text span { color: var(--gold); }
+
+    .nav-links {
+      display: flex; align-items: center; gap: 2.2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: rgba(255,255,255,0.78);
+      text-decoration: none;
+      font-size: .92rem; font-weight: 500;
+      letter-spacing: .04em;
+      transition: color .25s;
+    }
+
+    .nav-links a:hover { color: var(--gold-light); }
+
+    .btn {
+      display: inline-block;
+      padding: .7rem 1.6rem;
+      border-radius: 3px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600; font-size: .9rem;
+      letter-spacing: .05em;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all .25s;
+      border: none;
+    }
+
+    .btn-gold {
+      background: var(--gold);
+      color: var(--dark);
+    }
+    .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(200,155,60,0.35); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      border: 1.5px solid rgba(255,255,255,0.4);
+    }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+    .btn-green {
+      background: var(--green);
+      color: var(--white);
+    }
+    .btn-green:hover { background: var(--green-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(13,107,62,0.4); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      background: var(--dark);
+      position: relative;
+      display: flex; align-items: center;
+      overflow: hidden;
+      padding: 0 5%;
+    }
+
+    .hero-bg-pattern {
+      position: absolute; inset: 0;
+      background-image:
+        radial-gradient(circle at 70% 40%, rgba(13,107,62,0.35) 0%, transparent 55%),
+        radial-gradient(circle at 20% 80%, rgba(200,155,60,0.15) 0%, transparent 40%);
+    }
+
+    .hero-grid-overlay {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    .hero-content {
+      position: relative; z-index: 2;
+      max-width: 680px;
+      animation: fadeUp .9s ease both;
+    }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: rgba(200,155,60,0.15);
+      border: 1px solid rgba(200,155,60,0.4);
+      color: var(--gold-light);
+      padding: .4rem 1rem;
+      border-radius: 50px;
+      font-size: .82rem; font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 1.8rem;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.6rem, 5vw, 4.2rem);
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 1.4rem;
+    }
+
+    .hero-title .highlight {
+      color: var(--gold);
+      font-style: italic;
+    }
+
+    .hero-sub {
+      color: rgba(255,255,255,0.65);
+      font-size: 1.05rem;
+      line-height: 1.7;
+      max-width: 520px;
+      margin-bottom: 2.4rem;
+    }
+
+    .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    .hero-stats {
+      position: relative; z-index: 2;
+      margin-top: 5rem;
+      display: flex; gap: 3rem; flex-wrap: wrap;
+    }
+
+    .stat-item { border-left: 2px solid var(--gold); padding-left: 1.2rem; }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem; font-weight: 700;
+      color: var(--white);
+    }
+    .stat-label { font-size: .82rem; color: var(--muted); letter-spacing: .06em; text-transform: uppercase; margin-top: .2rem; }
+
+    .hero-image-col {
+      position: absolute; right: 0; top: 0; bottom: 0;
+      width: 45%;
+      overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .hero-illustration {
+      width: 100%; height: 100%;
+      background: linear-gradient(135deg, rgba(13,107,62,0.2) 0%, transparent 60%);
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    /* floating card */
+    .floating-card {
+      position: absolute;
+      background: rgba(255,255,255,0.07);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 1.4rem 1.8rem;
+      color: var(--white);
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .floating-card.card-1 { right: 8%; top: 22%; animation-delay: 0s; }
+    .floating-card.card-2 { right: 22%; bottom: 24%; animation-delay: 1.5s; }
+
+    .card-label { font-size: .72rem; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: .08em; }
+    .card-value { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--gold-light); margin: .3rem 0 .1rem; }
+    .card-sub { font-size: .8rem; color: rgba(255,255,255,0.6); }
+
+    /* ── SECTION COMMON ── */
+    section { padding: 6rem 5%; }
+
+    .section-tag {
+      display: inline-flex; align-items: center; gap: .5rem;
+      color: var(--green);
+      font-size: .8rem; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .section-tag::before {
+      content: '';
+      width: 28px; height: 2px;
+      background: var(--gold);
+      border-radius: 2px;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.9rem, 3.5vw, 2.8rem);
+      font-weight: 800;
+      color: var(--dark);
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .section-sub {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.7;
+      max-width: 540px;
+    }
+
+    /* ── PRODUCTS ── */
+    #products { background: var(--white); }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 1.6rem;
+      margin-top: 3.5rem;
+    }
+
+    .product-card {
+      background: var(--cream);
+      border-radius: 12px;
+      padding: 2.2rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform .3s, box-shadow .3s;
+      border: 1px solid rgba(13,107,62,0.08);
+    }
+
+    .product-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(13,107,62,0.12); }
+
+    .product-card.featured {
+      background: var(--green);
+      color: var(--white);
+    }
+
+    .product-card.featured .product-name,
+    .product-card.featured .product-amount,
+    .product-card.featured .product-desc { color: var(--white); }
+
+    .product-card.featured .product-desc { color: rgba(255,255,255,0.72); }
+
+    .product-icon {
+      width: 52px; height: 52px;
+      border-radius: 12px;
+      background: rgba(13,107,62,0.1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .product-card.featured .product-icon { background: rgba(255,255,255,0.15); }
+
+    .product-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem; font-weight: 700;
+      color: var(--dark);
+      margin-bottom: .5rem;
+    }
+
+    .product-amount {
+      font-size: .82rem; font-weight: 700;
+      color: var(--green);
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      margin-bottom: .9rem;
+    }
+
+    .product-desc {
+      font-size: .92rem;
+      color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: 1.5rem;
+    }
+
+    .product-features { list-style: none; margin-bottom: 1.8rem; }
+    .product-features li {
+      font-size: .88rem;
+      padding: .3rem 0;
+      color: var(--muted);
+      display: flex; align-items: center; gap: .5rem;
+    }
+
+    .product-card.featured .product-features li { color: rgba(255,255,255,0.75); }
+
+    .product-features li::before {
+      content: '✓';
+      color: var(--gold);
+      font-weight: 700;
+      font-size: .85rem;
+    }
+
+    /* ── HOW IT WORKS ── */
+    #how {
+      background: var(--dark);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #how .section-title { color: var(--white); }
+    #how .section-tag { color: var(--gold-light); }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.4rem;
+      margin-top: 3.5rem;
+    }
+
+    .step-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 2rem;
+      position: relative;
+      transition: background .3s;
+    }
+
+    .step-card:hover { background: rgba(255,255,255,0.07); }
+
+    .step-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem; font-weight: 900;
+      color: rgba(200,155,60,0.2);
+      line-height: 1;
+      margin-bottom: .5rem;
+    }
+
+    .step-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem; font-weight: 700;
+      color: var(--white);
+      margin-bottom: .6rem;
+    }
+
+    .step-desc { font-size: .9rem; color: rgba(255,255,255,0.5); line-height: 1.6; }
+
+    /* ── WHY US ── */
+    #why {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+      background: var(--cream);
+    }
+
+    .why-img {
+      background: var(--green);
+      border-radius: 16px;
+      min-height: 500px;
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .why-img-pattern {
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle at 30% 30%, rgba(200,155,60,0.2) 0%, transparent 60%),
+                        radial-gradient(circle at 80% 80%, rgba(255,255,255,0.08) 0%, transparent 50%);
+    }
+
+    .why-img-text {
+      position: relative; z-index: 2;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .why-img-text .big-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 5rem; font-weight: 900;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .why-img-text p { color: rgba(255,255,255,0.8); margin-top: .5rem; font-size: 1.1rem; }
+
+    .why-list { list-style: none; margin-top: 2.5rem; }
+    .why-item {
+      display: flex; gap: 1.2rem;
+      padding: 1.4rem 0;
+      border-bottom: 1px solid rgba(13,107,62,0.08);
+    }
+
+    .why-item-icon {
+      width: 46px; height: 46px; flex-shrink: 0;
+      background: rgba(13,107,62,0.08);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+    }
+
+    .why-item-title { font-weight: 600; color: var(--dark); margin-bottom: .3rem; }
+    .why-item-desc { font-size: .88rem; color: var(--muted); line-height: 1.5; }
+
+    /* ── TESTIMONIALS ── */
+    #testimonials { background: var(--white); }
+
+    .testi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.6rem;
+      margin-top: 3.5rem;
+    }
+
+    .testi-card {
+      background: var(--cream);
+      border-radius: 12px;
+      padding: 2rem;
+      border: 1px solid rgba(13,107,62,0.06);
+      transition: transform .3s;
+    }
+
+    .testi-card:hover { transform: translateY(-4px); }
+
+    .testi-stars { color: var(--gold); font-size: 1rem; margin-bottom: 1rem; letter-spacing: .05em; }
+
+    .testi-quote {
+      font-size: .95rem; color: var(--text);
+      line-height: 1.7;
+      font-style: italic;
+      margin-bottom: 1.5rem;
+    }
+
+    .testi-author { display: flex; align-items: center; gap: .9rem; }
+
+    .testi-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--green);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--white);
+      font-weight: 700; font-size: .95rem;
+    }
+
+    .testi-name { font-weight: 600; font-size: .9rem; color: var(--dark); }
+    .testi-role { font-size: .78rem; color: var(--muted); }
+
+    /* ── ELIGIBILITY ── */
+    #eligibility {
+      background: linear-gradient(135deg, var(--green) 0%, var(--mid) 100%);
+      text-align: center;
+    }
+
+    #eligibility .section-title { color: var(--white); }
+    #eligibility .section-sub { color: rgba(255,255,255,0.7); margin: 0 auto 3rem; }
+    #eligibility .section-tag { color: var(--gold-light); }
+
+    .elig-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.2rem;
+      margin-bottom: 3rem;
+    }
+
+    .elig-item {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 10px;
+      padding: 1.6rem;
+      color: var(--white);
+    }
+
+    .elig-item .elig-icon { font-size: 1.8rem; margin-bottom: .8rem; }
+    .elig-item .elig-text { font-size: .9rem; color: rgba(255,255,255,0.8); line-height: 1.5; }
+
+    /* ── CONTACT ── */
+    #contact {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 5rem;
+      background: var(--cream);
+      align-items: start;
+    }
+
+    .contact-info-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem; font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 1rem;
+    }
+
+    .contact-info-sub { color: var(--muted); font-size: .95rem; line-height: 1.7; margin-bottom: 2rem; }
+
+    .contact-detail {
+      display: flex; gap: 1rem;
+      align-items: flex-start;
+      margin-bottom: 1.4rem;
+    }
+
+    .contact-detail-icon {
+      width: 40px; height: 40px; flex-shrink: 0;
+      background: var(--green);
+      border-radius: 9px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--white);
+      font-size: 1rem;
+    }
+
+    .contact-detail-label { font-size: .78rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+    .contact-detail-value { font-weight: 600; color: var(--dark); margin-top: .15rem; }
+
+    .contact-form {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 2.5rem;
+      box-shadow: 0 8px 40px rgba(13,107,62,0.07);
+    }
+
+    .form-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem; font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 1.8rem;
+    }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+    .form-group { margin-bottom: 1.2rem; }
+
+    .form-group label {
+      display: block;
+      font-size: .82rem; font-weight: 600;
+      color: var(--mid);
+      letter-spacing: .04em;
+      margin-bottom: .45rem;
+      text-transform: uppercase;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: .85rem 1.1rem;
+      border: 1.5px solid rgba(13,107,62,0.15);
+      border-radius: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .92rem;
+      color: var(--text);
+      background: var(--cream);
+      outline: none;
+      transition: border .25s;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--green);
+      background: var(--white);
+    }
+
+    .form-group textarea { resize: vertical; min-height: 90px; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark);
+      padding: 4rem 5% 2rem;
+      color: rgba(255,255,255,0.55);
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .footer-brand-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem; font-weight: 700;
+      color: var(--white);
+      margin: .8rem 0 .6rem;
+    }
+
+    .footer-brand-desc { font-size: .87rem; line-height: 1.65; max-width: 260px; }
+
+    .footer-col-title {
+      font-size: .82rem; font-weight: 700;
+      color: var(--white);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-bottom: 1.2rem;
+    }
+
+    .footer-links { list-style: none; }
+    .footer-links li { margin-bottom: .7rem; }
+    .footer-links a {
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      font-size: .88rem;
+      transition: color .2s;
+    }
+    .footer-links a:hover { color: var(--gold-light); }
+
+    .footer-bottom {
+      padding-top: 1.8rem;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+      font-size: .82rem;
+    }
+
+    .footer-bottom-right { display: flex; gap: 1.5rem; }
+
+    .license-badge {
+      background: rgba(200,155,60,0.15);
+      color: var(--gold-light);
+      font-size: .75rem;
+      padding: .3rem .7rem;
+      border-radius: 4px;
+      border: 1px solid rgba(200,155,60,0.3);
+      font-weight: 600;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-10px); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      #why, #contact {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      .hero-image-col { display: none; }
+      .hero-content { max-width: 100%; }
+
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; }
+
+      .nav-links { display: none; }
+    }
+
+    @media (max-width: 520px) {
+      .footer-top { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      section { padding: 4rem 5%; }
+    }
+
+    /* scroll animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .65s ease, transform .65s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-icon">🐟</div>
+    <span class="nav-logo-text">Fish<span>borne</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#products">Loan Products</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#why">About Us</a></li>
+    <li><a href="#testimonials">Stories</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div style="display:flex;gap:.8rem;align-items:center;">
+    <a href="#contact" class="btn btn-outline" style="padding:.55rem 1.2rem;font-size:.85rem;">Login</a>
+    <a href="#contact" class="btn btn-gold">Apply Now</a>
+  </div>
+</nav>
+
+
+<!-- ── HERO ── -->
+<section id="hero">
+  <div class="hero-bg-pattern"></div>
+  <div class="hero-grid-overlay"></div>
+
+  <div style="width:100%;display:flex;flex-direction:column;">
+    <div class="hero-content">
+      <div class="hero-badge">🇳🇬 &nbsp;Serving Nigerian Entrepreneurs</div>
+
+      <h1 class="hero-title">
+        Grow Your Business<br>
+        with <span class="highlight">Trusted</span> Microfinance
+      </h1>
+
+      <p class="hero-sub">
+        Fishborne Microfinance Bank provides fast, accessible loans to small-scale
+        businesses across Nigeria — empowering traders, artisans, and entrepreneurs
+        to reach their full potential.
+      </p>
+
+      <div class="hero-cta">
+        <a href="#contact" class="btn btn-gold">Apply for a Loan</a>
+        <a href="#products" class="btn btn-outline">View Products</a>
+      </div>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">₦2B+</div>
+        <div class="stat-label">Loans Disbursed</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">14,000+</div>
+        <div class="stat-label">Businesses Funded</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">24hrs</div>
+        <div class="stat-label">Fast Approval</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">36</div>
+        <div class="stat-label">States Covered</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Cards -->
+  <div class="hero-image-col">
+    <div class="hero-illustration">
+      <div class="floating-card card-1">
+        <div class="card-label">Loan Approved</div>
+        <div class="card-value">₦500,000</div>
+        <div class="card-sub">Adaeze's Fashion Store — Lagos</div>
+      </div>
+      <div class="floating-card card-2">
+        <div class="card-label">Interest Rate</div>
+        <div class="card-value">2.5% / mo</div>
+        <div class="card-sub">Flexible repayment plans</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── LOAN PRODUCTS ── -->
+<section id="products">
+  <div class="section-tag">Loan Products</div>
+  <h2 class="section-title">Finance Built for<br>Every Business Stage</h2>
+  <p class="section-sub">From your first market stall to a growing enterprise — we have a loan product designed for you.</p>
+
+  <div class="products-grid">
+
+    <div class="product-card reveal">
+      <div class="product-icon">🌱</div>
+      <div class="product-name">Starter Loan</div>
+      <div class="product-amount">₦20,000 – ₦100,000</div>
+      <p class="product-desc">For brand-new businesses and first-time borrowers taking their very first steps.</p>
+      <ul class="product-features">
+        <li>No collateral required</li>
+        <li>Repay in 3–6 months</li>
+        <li>Approval within 24 hours</li>
+        <li>Low flat interest rate</li>
+      </ul>
+      <a href="#contact" class="btn btn-green" style="width:100%;text-align:center;">Apply Now</a>
+    </div>
+
+    <div class="product-card featured reveal">
+      <div class="product-icon">🚀</div>
+      <div class="product-name">Growth Loan</div>
+      <div class="product-amount">₦100,000 – ₦1,000,000</div>
+      <p class="product-desc">Expand your inventory, hire staff, or open a new location with our flagship loan.</p>
+      <ul class="product-features">
+        <li>Flexible repayment 6–18 months</li>
+        <li>Competitive interest rates</li>
+        <li>Dedicated loan officer</li>
+        <li>Rollover eligibility</li>
+      </ul>
+      <a href="#contact" class="btn btn-gold" style="width:100%;text-align:center;">Apply Now</a>
+    </div>
+
+    <div class="product-card reveal">
+      <div class="product-icon">🏢</div>
+      <div class="product-name">Enterprise Loan</div>
+      <div class="product-amount">₦1M – ₦10,000,000</div>
+      <p class="product-desc">For established SMEs ready to scale operations, buy equipment, or build capacity.</p>
+      <ul class="product-features">
+        <li>Up to 24-month tenure</li>
+        <li>Asset or guarantor-backed</li>
+        <li>Business advisory support</li>
+        <li>Refinancing available</li>
+      </ul>
+      <a href="#contact" class="btn btn-green" style="width:100%;text-align:center;">Apply Now</a>
+    </div>
+
+    <div class="product-card reveal">
+      <div class="product-icon">👩‍🌾</div>
+      <div class="product-name">Agri-Business Loan</div>
+      <div class="product-amount">₦50,000 – ₦5,000,000</div>
+      <p class="product-desc">Tailored for farmers, food processors, and agro-traders across Nigeria's value chain.</p>
+      <ul class="product-features">
+        <li>Seasonal repayment plans</li>
+        <li>Harvest-aligned schedules</li>
+        <li>Input procurement support</li>
+        <li>Group lending available</li>
+      </ul>
+      <a href="#contact" class="btn btn-green" style="width:100%;text-align:center;">Apply Now</a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ── HOW IT WORKS ── -->
+<section id="how">
+  <div class="section-tag">Simple Process</div>
+  <h2 class="section-title" style="color:var(--white);">From Application to<br>Cash in Hand</h2>
+
+  <div class="steps-grid">
+    <div class="step-card reveal">
+      <div class="step-number">01</div>
+      <div class="step-title">Apply Online or In-Branch</div>
+      <p class="step-desc">Fill out a simple application form online or visit any of our branches. Takes less than 15 minutes.</p>
+    </div>
+    <div class="step-card reveal">
+      <div class="step-number">02</div>
+      <div class="step-title">Document Verification</div>
+      <p class="step-desc">Submit your BVN, NIN, business documents, and a recent utility bill. We keep it minimal.</p>
+    </div>
+    <div class="step-card reveal">
+      <div class="step-number">03</div>
+      <div class="step-title">Credit Assessment</div>
+      <p class="step-desc">Our officers review your application quickly. Most decisions are made within 24 working hours.</p>
+    </div>
+    <div class="step-card reveal">
+      <div class="step-number">04</div>
+      <div class="step-title">Loan Disbursement</div>
+      <p class="step-desc">Once approved, funds are transferred directly to your account. Start growing immediately!</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── WHY FISHBORNE ── -->
+<section id="why">
+  <div class="why-img reveal">
+    <div class="why-img-pattern"></div>
+    <div class="why-img-text">
+      <div class="big-num">98%</div>
+      <p>Client Satisfaction Rate</p>
+      <br>
+      <div style="color:rgba(255,255,255,0.6);font-size:.9rem;margin-top:1rem;">Based on 2024 survey of<br>over 5,000 borrowers</div>
+    </div>
+  </div>
+
+  <div>
+    <div class="section-tag">Why Fishborne</div>
+    <h2 class="section-title">Banking That Believes<br>in Your Dream</h2>
+    <p class="section-sub">We are not just a lender — we are your financial growth partner, built for the realities of doing business in Nigeria.</p>
+
+    <ul class="why-list reveal">
+      <li class="why-item">
+        <div class="why-item-icon">⚡</div>
+        <div>
+          <div class="why-item-title">Fastest Approvals in the Industry</div>
+          <p class="why-item-desc">Our digital-first credit process means you get a decision in as little as 24 hours — no endless queues.</p>
+        </div>
+      </li>
+      <li class="why-item">
+        <div class="why-item-icon">🤝</div>
+        <div>
+          <div class="why-item-title">No Hidden Charges</div>
+          <p class="why-item-desc">Transparent pricing. What we quote is what you pay. No surprise fees, ever.</p>
+        </div>
+      </li>
+      <li class="why-item">
+        <div class="why-item-icon">📱</div>
+        <div>
+          <div class="why-item-title">Mobile-First Banking</div>
+          <p class="why-item-desc">Manage your loan, make repayments, and track your balance from your phone — anytime, anywhere.</p>
+        </div>
+      </li>
+      <li class="why-item">
+        <div class="why-item-icon">🛡️</div>
+        <div>
+          <div class="why-item-title">CBN Licensed & Regulated</div>
+          <p class="why-item-desc">Your money and data are safe with us. Fishborne is fully licensed by the Central Bank of Nigeria.</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+
+<!-- ── TESTIMONIALS ── -->
+<section id="testimonials">
+  <div class="section-tag">Success Stories</div>
+  <h2 class="section-title">Real People,<br>Real Growth</h2>
+  <p class="section-sub">Hear from Nigerian business owners who turned their dreams into reality with Fishborne.</p>
+
+  <div class="testi-grid">
+    <div class="testi-card reveal">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-quote">"I got a ₦250,000 loan in less than 48 hours. I used it to stock up my fabric shop before Eid. Best decision I ever made — I tripled my profits that season."</p>
+      <div class="testi-author">
+        <div class="testi-avatar">FA</div>
+        <div>
+          <div class="testi-name">Fatima Aliyu</div>
+          <div class="testi-role">Fabric Trader, Kano</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testi-card reveal">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-quote">"As a first-time borrower, I was nervous. But the Fishborne team walked me through every step. I now have two employees and a proper storefront. Thank you!"</p>
+      <div class="testi-author">
+        <div class="testi-avatar">CE</div>
+        <div>
+          <div class="testi-name">Chukwuemeka Obi</div>
+          <div class="testi-role">Phone Repair Shop, Onitsha</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testi-card reveal">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-quote">"The Agri-Business loan saved my farm. I could buy quality seeds and a small irrigation pump before planting season. Repayment was matched to my harvest — so thoughtful."</p>
+      <div class="testi-author">
+        <div class="testi-avatar">BM</div>
+        <div>
+          <div class="testi-name">Blessing Musa</div>
+          <div class="testi-role">Tomato Farmer, Plateau State</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── ELIGIBILITY ── -->
+<section id="eligibility">
+  <div class="section-tag" style="justify-content:center;">Who Can Apply</div>
+  <h2 class="section-title" style="color:var(--white);">Check Your Eligibility</h2>
+  <p class="section-sub" style="color:rgba(255,255,255,0.7);margin:0 auto 3rem;">We keep requirements simple so more Nigerians can access capital.</p>
+
+  <div class="elig-grid reveal">
+    <div class="elig-item">
+      <div class="elig-icon">🆔</div>
+      <div class="elig-text">Valid BVN & NIN (Bank Verification Number & National ID)</div>
+    </div>
+    <div class="elig-item">
+      <div class="elig-icon">🏪</div>
+      <div class="elig-text">Operate a verifiable small or medium-scale business in Nigeria</div>
+    </div>
+    <div class="elig-item">
+      <div class="elig-icon">🎂</div>
+      <div class="elig-text">Be at least 18 years old (up to 65 years of age)</div>
+    </div>
+    <div class="elig-item">
+      <div class="elig-icon">📍</div>
+      <div class="elig-text">Resident in any of the 36 states or FCT Abuja</div>
+    </div>
+    <div class="elig-item">
+      <div class="elig-icon">📄</div>
+      <div class="elig-text">Provide a recent utility bill or proof of address</div>
+    </div>
+    <div class="elig-item">
+      <div class="elig-icon">💳</div>
+      <div class="elig-text">Have an active bank account for loan disbursement</div>
+    </div>
+  </div>
+
+  <a href="#contact" class="btn btn-gold" style="font-size:1rem;padding:.9rem 2.5rem;">Start Your Application →</a>
+</section>
+
+
+<!-- ── CONTACT ── -->
+<section id="contact">
+  <div>
+    <div class="section-tag">Get In Touch</div>
+    <div class="contact-info-title">We're Ready to<br>Help You Grow</div>
+    <p class="contact-info-sub">Reach out to our team — whether you have questions about a loan product or need help with your application, we're here for you.</p>
+
+    <div class="contact-detail">
+      <div class="contact-detail-icon">📍</div>
+      <div>
+        <div class="contact-detail-label">Head Office</div>
+        <div class="contact-detail-value">14 Marina Road, Lagos Island, Lagos</div>
+      </div>
+    </div>
+
+    <div class="contact-detail">
+      <div class="contact-detail-icon">📞</div>
+      <div>
+        <div class="contact-detail-label">Phone</div>
+        <div class="contact-detail-value">+234 800 FISHBORNE (347-4276)</div>
+      </div>
+    </div>
+
+    <div class="contact-detail">
+      <div class="contact-detail-icon">✉️</div>
+      <div>
+        <div class="contact-detail-label">Email</div>
+        <div class="contact-detail-value">hello@fishbornebank.ng</div>
+      </div>
+    </div>
+
+    <div class="contact-detail">
+      <div class="contact-detail-icon">🕐</div>
+      <div>
+        <div class="contact-detail-label">Business Hours</div>
+        <div class="contact-detail-value">Mon – Fri: 8am – 5pm | Sat: 9am – 1pm</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="contact-form reveal">
+    <div class="form-title">Apply for a Loan</div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>First Name</label>
+        <input type="text" placeholder="Amara" />
+      </div>
+      <div class="form-group">
+        <label>Last Name</label>
+        <input type="text" placeholder="Okafor" />
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Phone Number</label>
+        <input type="tel" placeholder="+234 80X XXX XXXX" />
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" placeholder="you@email.com" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Loan Product</label>
+      <select>
+        <option>— Select a product —</option>
+        <option>Starter Loan (₦20k – ₦100k)</option>
+        <option>Growth Loan (₦100k – ₦1M)</option>
+        <option>Enterprise Loan (₦1M – ₦10M)</option>
+        <option>Agri-Business Loan</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Business Description</label>
+      <textarea placeholder="Tell us briefly about your business and how you plan to use the loan..."></textarea>
+    </div>
+    <button class="btn btn-green" style="width:100%;padding:1rem;font-size:.95rem;" onclick="alert('Thank you! A Fishborne loan officer will contact you within 24 hours.')">Submit Application →</button>
+    <p style="font-size:.78rem;color:var(--muted);text-align:center;margin-top:1rem;">By submitting you agree to our Privacy Policy. Your data is safe with us.</p>
+  </div>
+</section>
+
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div style="display:flex;align-items:center;gap:.6rem;">
+        <div style="width:34px;height:34px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;">🐟</div>
+        <span style="font-family:'Playfair Display',serif;font-weight:700;color:var(--white);font-size:1.15rem;">Fishborne MFB</span>
+      </div>
+      <p class="footer-brand-desc" style="margin-top:.9rem;">Empowering small businesses across Nigeria with accessible, transparent, and fast microfinance solutions since 2018.</p>
+      <div style="margin-top:1.2rem;">
+        <span class="license-badge">CBN Licensed</span>
+        &nbsp;
+        <span class="license-badge">NDIC Insured</span>
+      </div>
+    </div>
+
+    <div>
+      <div class="footer-col-title">Products</div>
+      <ul class="footer-links">
+        <li><a href="#products">Starter Loan</a></li>
+        <li><a href="#products">Growth Loan</a></li>
+        <li><a href="#products">Enterprise Loan</a></li>
+        <li><a href="#products">Agri-Business Loan</a></li>
+        <li><a href="#products">Group Lending</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="footer-col-title">Company</div>
+      <ul class="footer-links">
+        <li><a href="#why">About Us</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Press</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="footer-col-title">Legal</div>
+      <ul class="footer-links">
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms & Conditions</a></li>
+        <li><a href="#">Loan Agreement</a></li>
+        <li><a href="#">Complaints</a></li>
+        <li><a href="#">FCCPC Notice</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <span>© 2025 Fishborne Microfinance Bank Ltd. All rights reserved. RC No. 1234567</span>
+    <div class="footer-bottom-right">
+      <a href="#" style="color:rgba(255,255,255,0.4);text-decoration:none;font-size:.82rem;" onmouseover="this.style.color='var(--gold-light)'" onmouseout="this.style.color='rgba(255,255,255,0.4)'">Twitter/X</a>
+      <a href="#" style="color:rgba(255,255,255,0.4);text-decoration:none;font-size:.82rem;" onmouseover="this.style.color='var(--gold-light)'" onmouseout="this.style.color='rgba(255,255,255,0.4)'">Instagram</a>
+      <a href="#" style="color:rgba(255,255,255,0.4);text-decoration:none;font-size:.82rem;" onmouseover="this.style.color='var(--gold-light)'" onmouseout="this.style.color='rgba(255,255,255,0.4)'">Facebook</a>
+      <a href="#" style="color:rgba(255,255,255,0.4);text-decoration:none;font-size:.82rem;" onmouseover="this.style.color='var(--gold-light)'" onmouseout="this.style.color='rgba(255,255,255,0.4)'">LinkedIn</a>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(r => observer.observe(r));
+
+  // Stagger product cards
+  document.querySelectorAll('.products-grid .product-card').forEach((c, i) => {
+    c.style.transitionDelay = (i * 0.1) + 's';
+  });
+</script>
+</body>
+</html>
